@@ -176,6 +176,21 @@ namespace Radegast.RegionConsole.cs
     	            feedback("Everyone but you has been removed from the estate.");
     	        break;
     	        
+    	        case "restart":
+    	            if (commands.Length == 2){ //restart
+    	                feedback("Sim restarting");
+    	                Thread.Sleep(2000);
+    	                Client.Estate.RestartRegion();
+    	            }
+    	            else if(commands[2] == "/a")  { //cancle restart
+    	                Client.Estate.CancelRestart();
+    	                feedback("Sim restart aborted.");
+    	            }
+    	            
+    	            //TODO: restart with parameters
+    	            
+    	        break;
+    	        
 				case "help":
 					feedback("sim console help: command - explanation\n" +
 						"Usage: /sim [command] \n"+
@@ -189,6 +204,9 @@ namespace Radegast.RegionConsole.cs
 						"lockdown - kicks everyone off the sim and sets it to private access\n" +
 						"message <message> - send a message to everyone on the sim.\n" +
 						"removeall - kicks everyone else from the estate\n"+
+						"restart - restarts sim.\n"+
+						"restart /a - abort restart.\n"+
+						//"restart [int minutes, message] - restart sim in x minutes and send message.\n"+
 						"version - returns the current version of the simulator");
 				break;
 				
